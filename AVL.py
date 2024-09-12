@@ -42,7 +42,7 @@ class AVLTree:
             return Node(value)
         elif value < root.value:
             root.left = self._insert(root.left, value)
-        else:
+        elif value > root.value:
             root.right = self._insert(root.right, value)
 
         return self.rebalance(root)
@@ -79,8 +79,10 @@ class AVLTree:
         y.left = z
         z.right = T2
 
-        z.height = 1 + max(self.height(z.left), self.height(z.right))
-        y.height = 1 + max(self.height(y.left), self.height(y.right))
+        z.height = 1 + max(self.height(z.left),
+                           self.height(z.right))
+        y.height = 1 + max(self.height(y.left),
+                           self.height(y.right))
 
         return y
 
@@ -147,25 +149,19 @@ class AVLTree:
             print(node.value, end=" ")
 
 
-
-
 tree = AVLTree()
+
 tree.insert(10)
-tree.insert(20)
-tree.insert(30)
-tree.insert(40)
-
-
-print("Tree after 50:")
-
-tree.insert(50)
+tree.insert(5)
 
 tree.preorder()
 
-tree.delete(10)
-
-
-print("After deleting 10")
-
+tree.insert(3)
 tree.preorder()
+
+tree.insert(4)
+tree.preorder()
+
+tree.insert(3)
+
 

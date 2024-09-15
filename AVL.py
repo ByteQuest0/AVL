@@ -21,7 +21,6 @@ class AVLTree:
         return self.height(node.left) - self.height(node.right)
 
     def rebalance(self, node):
-        node.height = 1 + max(self.height(node.left), self.height(node.right))
 
         balance = self.get_balance_factor(node)
 
@@ -44,6 +43,9 @@ class AVLTree:
             root.left = self._insert(root.left, value)
         elif value > root.value:
             root.right = self._insert(root.right, value)
+
+        root.height = 1 + max(self.height(root.left), self.height(root.right))
+
 
         return self.rebalance(root)
 
@@ -69,6 +71,8 @@ class AVLTree:
 
         if not root:
             return root
+
+        root.height = 1 + max(self.height(root.left), self.height(root.right))
 
         return self.rebalance(root)
 
@@ -153,15 +157,11 @@ tree = AVLTree()
 
 tree.insert(10)
 tree.insert(5)
-
-tree.preorder()
-
-tree.insert(3)
-tree.preorder()
-
+tree.insert(2)
 tree.insert(4)
-tree.preorder()
-
 tree.insert(3)
+tree.delete(10)
+
+tree.preorder()
 
 
